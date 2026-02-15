@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { X, Grid, List } from 'lucide-react';
 import type { Ticket, User } from '../types/index.js';
-import { TicketStatus } from '../types/index.js';
 import api from '../lib/api.js';
 import { formatDate } from '../lib/utils.js';
 

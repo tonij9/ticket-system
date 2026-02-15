@@ -1,17 +1,21 @@
-export enum TicketStatus {
-  OPEN = 'open',
-  IN_PROGRESS = 'in_progress',
-  PENDING = 'pending',
-  RESOLVED = 'resolved',
-  CLOSED = 'closed',
-}
+export const TicketStatus = {
+  OPEN: 'open',
+  IN_PROGRESS: 'in_progress',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  CLOSED: 'closed',
+} as const;
 
-export enum TicketPriority {
-  LOW = 'low',
-  MEDIUM = 'medium',
-  HIGH = 'high',
-  URGENT = 'urgent',
-}
+export type TicketStatus = typeof TicketStatus[keyof typeof TicketStatus];
+
+export const TicketPriority = {
+  LOW: 'low',
+  MEDIUM: 'medium',
+  HIGH: 'high',
+  URGENT: 'urgent',
+} as const;
+
+export type TicketPriority = typeof TicketPriority[keyof typeof TicketPriority];
 
 export interface User {
   id: number;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { X, RefreshCw } from 'lucide-react';
+import { X } from 'lucide-react';
 import type { User, Ticket } from '../types/index.js';
 import api from '../lib/api.js';
 import { formatDate } from '../lib/utils.js';

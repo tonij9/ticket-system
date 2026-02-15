@@ -1,4 +1,4 @@
-import { Inbox, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { Inbox, Clock, AlertCircle } from 'lucide-react';
 import { cn } from '../lib/utils.js';
 
 interface SidebarProps {

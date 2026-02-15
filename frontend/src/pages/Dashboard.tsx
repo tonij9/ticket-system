@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { Ticket, User } from '../types/index.js';
-import { TicketStatus } from '../types/index.js';
 import api from '../lib/api.js';
 import Sidebar from '../components/Sidebar.js';
 import TicketTable from '../components/TicketTable.js';

@@ -9,7 +9,7 @@ interface TicketTableProps {
   onRefresh: () => void;
 }
 
-export default function TicketTable({ tickets, onRefresh }: TicketTableProps) {
+export default function TicketTable({ tickets }: TicketTableProps) {
   const navigate = useNavigate();
 
   const getStatusBadgeColor = (status: TicketStatus) => {

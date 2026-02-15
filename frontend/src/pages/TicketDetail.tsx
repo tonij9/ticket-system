@@ -24,11 +24,9 @@ export default function TicketDetail() {
   const [replyText, setReplyText] = useState('');
   const [replyType, setReplyType] = useState<'public' | 'internal'>('public');
   const [showMacroDropdown, setShowMacroDropdown] = useState(false);
-  const [error, setError] = useState<string>('');
 
   // Form fields
   const [assignee, setAssignee] = useState('');
-  const [followers, setFollowers] = useState<string[]>([]);
   const [tags, setTags] = useState('');
   const [clientLocation, setClientLocation] = useState('');
   const [type, setType] = useState('');
