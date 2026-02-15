@@ -9,7 +9,7 @@ WORKDIR /app
 RUN pip install --upgrade pip
 
 # Copy and install requirements - only 7 packages needed
-COPY backend/requirements.txt .
+COPY backend/requirements-prod.txt ./requirements.txt
 RUN echo "=== REQUIREMENTS.TXT CONTENTS ===" && cat requirements.txt && echo "=== END ===" && pip install --no-cache-dir -r requirements.txt
 
 # Copy backend code
