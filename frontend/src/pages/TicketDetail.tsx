@@ -46,13 +46,11 @@ export default function TicketDetail() {
   const fetchTicket = async () => {
     try {
       setLoading(true);
-      setError('');
       const response = await api.get<Ticket>(`/tickets/${id}`);
       setTicket(response.data);
       setPriority(response.data.priority);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to fetch ticket:', err);
-      setError('Failed to load ticket. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -60,20 +58,19 @@ export default function TicketDetail() {
 
   const handleSubmitReply = async () => {
     if (!replyText.trim()) {
-      setError('Please enter a reply message');
+      alert('Please enter a reply message');
       return;
     }
 
     try {
-      setError('');
       // TODO: Implement actual reply submission to backend
       // await api.post(`/tickets/${id}/replies`, { content: replyText, type: replyType });
       console.log('Submit reply:', replyText, 'Type:', replyType);
       alert('Reply submitted successfully!');
       setReplyText('');
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Failed to submit reply:', err);
-      setError('Failed to submit reply. Please try again.');
+      alert('Failed to submit reply. Please try again.');
     }
   };
 
