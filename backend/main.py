@@ -91,7 +91,14 @@ seed_data()
 app = FastAPI(title="Ticket System API", version="1.0.0")
 
 # Get allowed origins from environment variable
-allowed_origins = os.getenv("FRONTEND_URL", "http://localhost:5173").split(",")
+frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
+allowed_origins = [
+    frontend_url,
+    frontend_url.rstrip("/"),
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://ticket-system-lac.vercel.app",
+]
 
 # Configure CORS
 app.add_middleware(
