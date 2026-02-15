@@ -1,13 +1,16 @@
 FROM python:3.10-slim
 
+# Cache bust - change this to force rebuild
+ARG CACHEBUST=2
+
 WORKDIR /app
 
 # Update pip first
 RUN pip install --upgrade pip
 
-# Copy and install requirements
+# Copy and install requirements - only 7 packages needed
 COPY backend/requirements.txt .
-RUN cat requirements.txt && pip install --no-cache-dir -r requirements.txt
+RUN echo "=== REQUIREMENTS.TXT CONTENTS ===" && cat requirements.txt && echo "=== END ===" && pip install --no-cache-dir -r requirements.txt
 
 # Copy backend code
 COPY backend/ .
