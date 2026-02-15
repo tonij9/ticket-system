@@ -30,6 +30,18 @@ def seed_data():
             db.commit()
             db.refresh(admin)
 
+            # Create toni user
+            toni = User(
+                email="toni@example.com",
+                username="toni",
+                hashed_password=pwd_context.hash("Toni123"),
+                full_name="Toni",
+                is_admin=1
+            )
+            db.add(toni)
+            db.commit()
+            db.refresh(toni)
+
             # Create sample users
             users_data = [
                 {"email": "sarah.chen@example.com", "username": "sarah.chen", "full_name": "Sarah Chen"},
@@ -37,7 +49,7 @@ def seed_data():
                 {"email": "emma.davis@example.com", "username": "emma.davis", "full_name": "Emma Davis"},
             ]
 
-            created_users = [admin]
+            created_users = [admin, toni]
             for u in users_data:
                 user = User(
                     email=u["email"],
