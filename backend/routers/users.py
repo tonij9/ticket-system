@@ -22,6 +22,23 @@ class UserResponse(BaseModel):
     class Config:
         from_attributes = True
 
+class PublicUserResponse(BaseModel):
+    id: int
+    username: str
+    full_name: str | None
+    is_admin: int
+
+    class Config:
+        from_attributes = True
+
+
+@router.get("/public", response_model=List[PublicUserResponse])
+def get_public_users(db: Session = Depends(get_db)):
+    """Public endpoint to list all users (no authentication required)"""
+    users = db.query(User).filter(User.is_active == 1).all()
+    return users
+
+
 @router.get("/me", response_model=UserResponse)
 def get_current_user_info(current_user: User = Depends(get_current_user)):
     return current_user

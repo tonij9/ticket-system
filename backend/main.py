@@ -47,6 +47,11 @@ def seed_data():
                 {"email": "sarah.chen@example.com", "username": "sarah.chen", "full_name": "Sarah Chen"},
                 {"email": "mike.wilson@example.com", "username": "mike.wilson", "full_name": "Mike Wilson"},
                 {"email": "emma.davis@example.com", "username": "emma.davis", "full_name": "Emma Davis"},
+                {"email": "john.smith@example.com", "username": "john.smith", "full_name": "John Smith"},
+                {"email": "lisa.johnson@example.com", "username": "lisa.johnson", "full_name": "Lisa Johnson"},
+                {"email": "david.brown@example.com", "username": "david.brown", "full_name": "David Brown"},
+                {"email": "jennifer.lee@example.com", "username": "jennifer.lee", "full_name": "Jennifer Lee"},
+                {"email": "robert.taylor@example.com", "username": "robert.taylor", "full_name": "Robert Taylor"},
             ]
 
             created_users = [admin, toni]
@@ -63,11 +68,20 @@ def seed_data():
                 db.refresh(user)
                 created_users.append(user)
 
-            # Create sample tickets
+            # Create sample tickets with variety
             tickets_data = [
-                {"number": "28371", "subject": "BankEx ID: 2835726/16146490 - Bankruptcy", "status": TicketStatus.OPEN, "requester": created_users[1]},
-                {"number": "28372", "subject": "Payment Issue - Account Review Required", "status": TicketStatus.PENDING, "requester": created_users[2]},
-                {"number": "28373", "subject": "BankEx ID: 2833871/16135965 - Consumer Proposal", "status": TicketStatus.RESOLVED, "requester": created_users[1]},
+                {"number": "28371", "subject": "BankEx ID: 2835726/16146490 - Bankruptcy", "status": TicketStatus.OPEN, "priority": TicketPriority.HIGH, "requester_idx": 1, "assignee_idx": 0},
+                {"number": "28372", "subject": "Payment Issue - Account Review Required", "status": TicketStatus.PENDING, "priority": TicketPriority.MEDIUM, "requester_idx": 2, "assignee_idx": 0},
+                {"number": "28373", "subject": "BankEx ID: 2833871/16135965 - Consumer Proposal", "status": TicketStatus.RESOLVED, "priority": TicketPriority.LOW, "requester_idx": 1, "assignee_idx": 0},
+                {"number": "28374", "subject": "Login Authentication Error - Unable to Access Dashboard", "status": TicketStatus.OPEN, "priority": TicketPriority.HIGH, "requester_idx": 3, "assignee_idx": 1},
+                {"number": "28375", "subject": "Data Export Feature Request - CSV Format", "status": TicketStatus.PENDING, "priority": TicketPriority.LOW, "requester_idx": 4, "assignee_idx": 0},
+                {"number": "28376", "subject": "BankEx ID: 2839012/16152334 - Account Closure", "status": TicketStatus.OPEN, "priority": TicketPriority.MEDIUM, "requester_idx": 5, "assignee_idx": 1},
+                {"number": "28377", "subject": "Password Reset Not Working - Email Not Received", "status": TicketStatus.RESOLVED, "priority": TicketPriority.HIGH, "requester_idx": 6, "assignee_idx": 0},
+                {"number": "28378", "subject": "Report Generation Timeout - Large Dataset", "status": TicketStatus.PENDING, "priority": TicketPriority.MEDIUM, "requester_idx": 7, "assignee_idx": 1},
+                {"number": "28379", "subject": "BankEx ID: 2841567/16158901 - Debt Consolidation", "status": TicketStatus.OPEN, "priority": TicketPriority.HIGH, "requester_idx": 2, "assignee_idx": 0},
+                {"number": "28380", "subject": "User Permission Issue - Cannot View Reports", "status": TicketStatus.PENDING, "priority": TicketPriority.MEDIUM, "requester_idx": 8, "assignee_idx": 1},
+                {"number": "28381", "subject": "API Integration Error - Third Party Service", "status": TicketStatus.OPEN, "priority": TicketPriority.HIGH, "requester_idx": 3, "assignee_idx": 0},
+                {"number": "28382", "subject": "BankEx ID: 2843298/16163445 - Payment Plan Setup", "status": TicketStatus.RESOLVED, "priority": TicketPriority.LOW, "requester_idx": 4, "assignee_idx": 1},
             ]
 
             for t in tickets_data:
@@ -75,9 +89,9 @@ def seed_data():
                     ticket_number=t["number"],
                     subject=t["subject"],
                     status=t["status"],
-                    priority=TicketPriority.MEDIUM,
-                    requester_id=t["requester"].id,
-                    assignee_id=admin.id
+                    priority=t["priority"],
+                    requester_id=created_users[t["requester_idx"]].id,
+                    assignee_id=created_users[t["assignee_idx"]].id
                 )
                 db.add(ticket)
 
